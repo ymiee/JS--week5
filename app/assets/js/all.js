@@ -174,7 +174,7 @@ function filterArea(e) {
   let newData = [];
   
   //  判斷篩選區域
-  if (value == '') {
+  if (value == '全部地區' || value == '') {
     newData = data;
   } else {
     newData = data.filter( (item) => {
@@ -195,6 +195,19 @@ function filterArea(e) {
 function addTicket(e) {
   //  取消事件的預設行為
   e.preventDefault();
+
+  
+  // let isAreaExist = false;
+  // data.forEach( (item)  =>{
+  //   if (item.area == area) {
+  //     isAreaExist = true;
+  //   }
+  // });
+  
+  // if (isAreaExist) {
+  //   renderSelect(data);
+  // }
+
 
   // 清空表格錯誤訊息
   ticketInputs.forEach( (item) => {  
@@ -220,9 +233,9 @@ function addTicket(e) {
       imgUrl: ticketImgUrl.value,
       area: ticketRegion.value,
       description: ticketDescription.value,
-      group: ticketNum.value,
-      price: ticketPrice.value,
-      rate: ticketRate.value,
+      group: Number(ticketNum.value),
+      price: Number(ticketPrice.value),
+      rate: Number(ticketRate.value),
     };
 
     // 把新資料加入 data 中
@@ -230,6 +243,13 @@ function addTicket(e) {
 
     // 渲染卡片
     renderCard(data);
+
+    //  渲染下拉地區選單
+    renderSelect(data);
+
+    const searchSelect = document.querySelector('.searchSelect');
+    searchSelect.value = '';
+    searchText.textContent = '';
 
     // 清空表格
     ticketForm.reset();
@@ -241,8 +261,9 @@ function addTicket(e) {
 //  //  額外東西
 // 渲染下拉地區選單
 function renderSelect(renderArea) {
+
   // 預設資料
-  let selectStr = '<option value="" disabled selected hidden>地區搜尋</option><option value="">全部地區</option>';
+  let selectStr = '<option value="" disabled selected hidden>地區搜尋</option><option value="全部地區">全部地區</option>';
   const areaArray = [];
 
   // 取得不重複地區
