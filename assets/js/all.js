@@ -1,6 +1,6 @@
 "use strict";
 
-//  表格驗證 (第七周助教直播)
+//表格驗證 (第七周助教直播)
 var constraints = {
   '套票名稱': {
     presence: {
@@ -153,16 +153,7 @@ function filterArea(e) {
 
 function addTicket(e) {
   //  取消事件的預設行為
-  e.preventDefault(); // let isAreaExist = false;
-  // data.forEach( (item)  =>{
-  //   if (item.area == area) {
-  //     isAreaExist = true;
-  //   }
-  // });
-  // if (isAreaExist) {
-  //   renderSelect(data);
-  // }
-  // 清空表格錯誤訊息
+  e.preventDefault(); // 清空表格錯誤訊息
 
   ticketInputs.forEach(function (item) {
     // item 為表格，item.nextElementSibling 是表格下方的 <small>
@@ -191,15 +182,12 @@ function addTicket(e) {
       rate: Number(ticketRate.value)
     }; // 把新資料加入 data 中
 
-    data.push(ticket); // 渲染卡片
+    data.unshift(ticket); // 渲染卡片
 
     renderCard(data); //  渲染下拉地區選單
+    // renderSelect(data);
 
-    renderSelect(data);
-
-    var _searchSelect = document.querySelector('.searchSelect');
-
-    _searchSelect.value = '';
+    searchSelect.value = '';
     searchText.textContent = ''; // 清空表格
 
     ticketForm.reset();
