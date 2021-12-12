@@ -1,4 +1,4 @@
-//  表格驗證 (第七周助教直播)
+ //表格驗證 (第七周助教直播)
 const constraints = {
   '套票名稱': {
     presence: {
@@ -57,7 +57,7 @@ const constraints = {
 
 
 //  data
-const data = [
+let data = [
   {
     "id": 0,
     "name": "肥宅心碎賞櫻3日",
@@ -196,19 +196,6 @@ function addTicket(e) {
   //  取消事件的預設行為
   e.preventDefault();
 
-  
-  // let isAreaExist = false;
-  // data.forEach( (item)  =>{
-  //   if (item.area == area) {
-  //     isAreaExist = true;
-  //   }
-  // });
-  
-  // if (isAreaExist) {
-  //   renderSelect(data);
-  // }
-
-
   // 清空表格錯誤訊息
   ticketInputs.forEach( (item) => {  
     // item 為表格，item.nextElementSibling 是表格下方的 <small>
@@ -216,7 +203,7 @@ function addTicket(e) {
   })
 
   // 驗證表單
-  const errors = validate(ticketForm, constraints);
+  let errors = validate(ticketForm, constraints);
 
   // 如果驗證錯誤*
   if (errors) {
@@ -239,15 +226,14 @@ function addTicket(e) {
     };
 
     // 把新資料加入 data 中
-    data.push(ticket);
+    data.unshift(ticket);
 
     // 渲染卡片
     renderCard(data);
 
     //  渲染下拉地區選單
-    renderSelect(data);
+    // renderSelect(data);
 
-    const searchSelect = document.querySelector('.searchSelect');
     searchSelect.value = '';
     searchText.textContent = '';
 
